@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    /*
+     Node.js 是运行环境 是开发平台
+     Node.js是一个基于ChromeV8引擎的JavaScript运行环境，它是把Chrome浏览器的v8版本的js引擎
+     进行了封装，是原本在浏览器也就是客户端才拥有的js引擎封装进了Node.js。
+     这样是Node.js可以在非浏览器环境以外的地方也能够直接解析JS代码，比如javascript可以运行在
+     服务器端（只要后台服务器用Node.js搭建）
+     Node.js实际上就是一款对于ES标准实现的javascript引擎
+     NodeJS是CommonJS规范的实现
+     */
+
+    /*  浏览器不兼容CommonJS的根本原因，在于缺少四个Node.js环境的变量。
+     module
+     exports
+     require
+     global
+     */
+
+    let module = { // 创建一个对象module
+      exports: {}, // 给module对象添加exports属性
+    };
+    // IIFE立即执行函数
+    (function(module, exports){ // 1，内部函数中有两个形参
+      exports.multiply = function (n) { return n * 1000 };// 3，函数内部定义相乘的方法
+    })(module, module.exports); // 2， 对应的立即执行函数也会传进实参 注意这两个实参就是我们上面定义好的对象及其内部的属性
+
+    console.log(module.exports.multiply);
+    let f = module.exports.multiply;
+    console.log(f(5));  // 5000
+
+</script>
+</body>
+</html>
+
+

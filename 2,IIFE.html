@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+  /*
+  * IIFE立即执行函数在模块化中大有用处 ，用立即执行函数处理模块化可以减少全局变量造成的空间污染
+  * */
+  /*
+  * 创建一个立即执行的匿名函数
+  * */
+  let counter = (function(){
+    let i = 0;
+    // 内部函数返回一个对象 对象里面有定义的方法 直接就可以通过counter变量去调用方法
+    return {
+      // 并且可以访问函数作用域的局部变量 i
+      get: function() {
+        return i;
+      },
+      set: function(val) {
+        return i = val; // 旧值赋新值
+      },
+      increment: function(){
+        // return i++; //  0 3 3 4
+        return ++i; // 0 3 4 5
+      }
+    }
+  })();
+  console.log(counter.get());
+  console.log(counter.set(3));
+  console.log(counter.increment());
+  console.log(counter.increment());
+  // 并且外部无法直接访问函数内部的 i
+  console.log(counter.i); // undefined
+</script>
+
+</body>
+</html>
